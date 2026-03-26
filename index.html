@@ -3,217 +3,186 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>R3MUS ARCHIVE | 1.21.X</title>
+    <title>R3MUS VAULT | Premium Minecraft Archive</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --primary: #a855f7; /* Purple theme from your logo */
-            --bg: #050505;
-            --card-bg: #0f0f0f;
-            --text-main: #ffffff;
-            --text-dim: #888888;
-        }
+        :root { --primary: #a855f7; --bg: #050505; --card-bg: #0f0f0f; --accent: #1a1a1a; }
+        body { margin: 0; background: var(--bg); color: white; font-family: 'Inter', sans-serif; overflow-x: hidden; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 40px 20px; }
+        
+        /* Header & Nav */
+        header { text-align: center; margin-bottom: 50px; }
+        header h1 { font-size: 3.5rem; font-weight: 900; background: linear-gradient(90deg, #fff, var(--primary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin: 0; letter-spacing: -2px; }
+        
+        .nav-tabs { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-bottom: 40px; }
+        .tab { padding: 12px 25px; background: var(--accent); border-radius: 10px; cursor: pointer; font-weight: 700; transition: 0.3s; border: 1px solid transparent; }
+        .tab.active { background: var(--primary); color: white; }
+        .tab:hover { border-color: var(--primary); }
 
-        body, html {
-            margin: 0;
-            padding: 0;
-            background-color: var(--bg);
-            color: var(--text-main);
-            font-family: 'Inter', sans-serif;
-            overflow-x: hidden;
-            -webkit-font-smoothing: antialiased;
-        }
+        /* Grid */
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 25px; }
+        .card { background: var(--card-bg); border: 1px solid var(--accent); border-radius: 20px; overflow: hidden; transition: 0.3s; cursor: pointer; }
+        .card:hover { transform: translateY(-5px); border-color: var(--primary); }
+        .card-img { width: 100%; height: 160px; object-fit: cover; }
+        .card-body { padding: 20px; }
+        .card-title { font-size: 20px; font-weight: 800; margin: 0; }
+        .card-meta { font-size: 12px; color: #666; margin-top: 10px; text-transform: uppercase; }
 
-        /* Full Screen Wrapper */
-        .container {
-            width: 100%;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 60px 20px;
-            box-sizing: border-box;
-        }
+        /* Download Page View */
+        #downloadPage { display: none; text-align: center; }
+        .dl-header img { width: 100%; max-width: 800px; border-radius: 20px; margin-bottom: 30px; border: 1px solid var(--accent); }
+        .dl-links { display: flex; flex-direction: column; gap: 15px; max-width: 500px; margin: 30px auto; }
+        .dl-btn { background: white; color: black; padding: 18px; border-radius: 12px; text-decoration: none; font-weight: 900; display: flex; justify-content: space-between; transition: 0.2s; }
+        .dl-btn:hover { background: var(--primary); color: white; }
 
-        /* Main Title Header */
-        header {
-            text-align: center;
-            margin-bottom: 50px;
-        }
-
-        header h1 {
-            font-size: clamp(2.5rem, 10vw, 5rem);
-            font-weight: 900;
-            background: linear-gradient(90deg, #fff, var(--primary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            letter-spacing: -3px;
-            margin: 0;
-            text-transform: uppercase;
-        }
-
-        header p {
-            color: var(--text-dim);
-            letter-spacing: 5px;
-            font-weight: 700;
-            font-size: 12px;
-            margin-top: 10px;
-        }
-
-        /* Search Box */
-        .search-box {
-            width: 100%;
-            max-width: 600px;
-            position: relative;
-            margin-bottom: 60px;
-        }
-
-        .search-box input {
-            width: 100%;
-            padding: 20px 25px;
-            border-radius: 16px;
-            border: 1px solid #1a1a1a;
-            background: #111;
-            color: white;
-            outline: none;
-            font-size: 16px;
-            transition: 0.3s;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
-
-        .search-box input:focus {
-            border-color: var(--primary);
-            box-shadow: 0 0 20px rgba(168, 85, 247, 0.2);
-        }
-
-        /* Grid Layout */
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 25px;
-            width: 100%;
-            max-width: 1300px;
-        }
-
-        /* Client Card */
-        .card {
-            background: var(--card-bg);
-            border: 1px solid #1a1a1a;
-            border-radius: 24px;
-            padding: 30px;
-            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .card:hover {
-            transform: translateY(-12px);
-            border-color: var(--primary);
-            box-shadow: 0 25px 50px rgba(0,0,0,0.8);
-        }
-
-        .card-tag {
-            font-size: 11px;
-            font-weight: 900;
-            background: rgba(168, 85, 247, 0.1);
-            color: var(--primary);
-            padding: 6px 12px;
-            border-radius: 8px;
-            display: inline-block;
-            margin-bottom: 20px;
-        }
-
-        .card h2 {
-            font-size: 24px;
-            margin: 0 0 10px 0;
-            font-weight: 800;
-        }
-
-        .card p {
-            color: var(--text-dim);
-            font-size: 14px;
-            line-height: 1.6;
-            margin-bottom: 25px;
-        }
-
-        /* Download Button */
-        .btn {
-            background: #fff;
-            color: #000;
-            text-align: center;
-            padding: 16px;
-            border-radius: 14px;
-            text-decoration: none;
-            font-weight: 900;
-            font-size: 14px;
-            letter-spacing: 1px;
-            transition: 0.2s;
-        }
-
-        .btn:hover {
-            background: var(--primary);
-            color: #fff;
-        }
-
-        footer {
-            margin-top: 100px;
-            color: #222;
-            font-size: 12px;
-            font-weight: 800;
-            letter-spacing: 2px;
-        }
+        /* Admin Panel */
+        #adminPanel { display: none; background: #111; padding: 30px; border-radius: 20px; border: 2px dashed var(--primary); margin-top: 50px; }
+        .admin-input { width: 100%; padding: 12px; margin: 8px 0; background: #000; border: 1px solid #333; color: white; border-radius: 8px; box-sizing: border-box; }
+        #outputArea { background: #000; color: #0f0; padding: 15px; font-size: 11px; width: 100%; height: 150px; margin-top: 20px; border-radius: 8px; display: none; }
+        
+        .back-btn { margin-bottom: 20px; display: inline-block; color: var(--primary); cursor: pointer; font-weight: 700; }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <header>
-        <h1>ʀ3ᴍᴜ'ꜱ ᴀʀᴄʜɪᴠᴇ</h1>
-        <p>PREMIUM MINECRAFT UTILITY COLLECTION</p>
+    <header id="mainHeader">
+        <h1>ʀ3ᴍᴜꜱ ᴠᴀᴜʟᴛ</h1>
+        <p style="color:#444; font-weight:800; letter-spacing:5px;">PREMIUM ARCHIVE</p>
     </header>
 
-    <div class="search-box">
-        <input type="text" id="clientSearch" onkeyup="filter()" placeholder="🔍 Search through the vault...">
+    <div id="navArea" class="nav-tabs">
+        <div class="tab active" onclick="filterCat('all')">ALL</div>
+        <div class="tab" onclick="filterCat('clients')">CLIENTS</div>
+        <div class="tab" onclick="filterCat('mods')">MODS/MACROS</div>
+        <div class="tab" onclick="filterCat('bypass')">SS BYPASS</div>
+        <div class="tab" onclick="filterCat('pvp')">PVP OPTIMIZERS</div>
+        <div class="tab" onclick="filterCat('source')">SOURCE CODES</div>
     </div>
 
-    <div class="grid" id="grid">
-        <div class="card">
-            <div>
-                <span class="card-tag">1.21.X FABRIC</span>
-                <h2>Argon Client</h2>
-                <p>Advanced utility with Multi-Version support (1.21 - 1.21.11) and RSHIFT GUI.</p>
+    <div id="homeView">
+        <div class="grid" id="mainGrid">
             </div>
-            <a href="https://shrinkme.click/DOXR" class="btn">VIEW DOWNLOADS</a>
-        </div>
+    </div>
 
-        <div class="card">
-            <div>
-                <span class="card-tag" style="color: #06b6d4; background: rgba(6, 182, 212, 0.1);">1.21.1 FABRIC</span>
-                <h2>Ventura Client</h2>
-                <p>Top-tier bypasses and performance optimizations for 1.21.1 Fabric servers.</p>
+    <div id="downloadPage">
+        <div class="back-btn" onclick="showHome()">← BACK TO VAULT</div>
+        <div class="dl-header">
+            <h1 id="dlTitle" style="font-size: 3rem; margin-bottom: 10px;">Client Name</h1>
+            <p id="dlDesc" style="color:#888; margin-bottom: 30px;">Version Info</p>
+            <img id="dlImg" src="" alt="Preview">
+        </div>
+        <div class="dl-links" id="linksContainer">
             </div>
-            <a href="#" class="btn">VIEW DOWNLOADS</a>
-        </div>
+    </div>
 
-        </div>
-
-    <footer>© 2026 R3MUS VAULT • SECURE ARCHIVE</footer>
+    <p onclick="openAdmin()" style="color:#0a0a0a; margin-top:100px; text-align:center; cursor:pointer;">Admin Console</p>
+    
+    <div id="adminPanel">
+        <h2 style="color:var(--primary); margin:0 0 20px 0;">Vault Manager</h2>
+        <select id="aCat" class="admin-input">
+            <option value="clients">Clients</option>
+            <option value="mods">Mods/Macros</option>
+            <option value="bypass">SS Bypass</option>
+            <option value="pvp">PvP Optimizers</option>
+            <option value="source">Source Codes</option>
+        </select>
+        <input type="text" id="aName" class="admin-input" placeholder="Item Name">
+        <input type="text" id="aImg" class="admin-input" placeholder="Screenshot URL (Direct Link)">
+        <input type="text" id="aVersions" class="admin-input" placeholder="Versions (Comma separated: 1.21, 1.21.1)">
+        <input type="text" id="aLinks" class="admin-input" placeholder="Links (Comma separated: link1, link2)">
+        <button onclick="generateItem()" style="background:var(--primary); color:white; border:none; padding:15px; width:100%; border-radius:8px; font-weight:900; cursor:pointer;">GENERATE VAULT CODE</button>
+        <textarea id="outputArea" readonly></textarea>
+    </div>
 </div>
 
 <script>
-    function filter() {
-        let input = document.getElementById('clientSearch').value.toUpperCase();
+    // System to handle views
+    function showHome() {
+        document.getElementById('homeView').style.display = 'block';
+        document.getElementById('navArea').style.display = 'flex';
+        document.getElementById('mainHeader').style.display = 'block';
+        document.getElementById('downloadPage').style.display = 'none';
+    }
+
+    function openDownload(name, img, versions, links, cat) {
+        document.getElementById('homeView').style.display = 'none';
+        document.getElementById('navArea').style.display = 'none';
+        document.getElementById('mainHeader').style.display = 'none';
+        document.getElementById('downloadPage').style.display = 'block';
+
+        document.getElementById('dlTitle').innerText = name;
+        document.getElementById('dlImg').src = img;
+        document.getElementById('dlDesc').innerText = "Category: " + cat.toUpperCase();
+
+        const vArr = versions.split(',');
+        const lArr = links.split(',');
+        let html = '';
+        vArr.forEach((v, i) => {
+            html += `<a href="${lArr[i].trim()}" class="dl-btn" target="_blank"><span>DOWNLOAD v${v.trim()}</span> <span>→</span></a>`;
+        });
+        document.getElementById('linksContainer').innerHTML = html;
+        window.scrollTo(0,0);
+    }
+
+    function filterCat(cat) {
         let cards = document.getElementsByClassName('card');
-        for (let i = 0; i < cards.length; i++) {
-            let title = cards[i].getElementsByTagName('h2')[0].innerText;
-            if (title.toUpperCase().indexOf(input) > -1) {
-                cards[i].style.display = "flex";
+        let tabs = document.getElementsByClassName('tab');
+        
+        for(let tab of tabs) tab.classList.remove('active');
+        event.target.classList.add('active');
+
+        for (let card of cards) {
+            if (cat === 'all' || card.getAttribute('data-cat') === cat) {
+                card.style.display = "block";
             } else {
-                cards[i].style.display = "none";
+                card.style.display = "none";
             }
         }
     }
+
+    function openAdmin() {
+        let p = prompt("Password:");
+        if(p === "pookie123") document.getElementById('adminPanel').style.display = 'block';
+    }
+
+    function generateItem() {
+        const name = document.getElementById('aName').value;
+        const cat = document.getElementById('aCat').value;
+        const img = document.getElementById('aImg').value;
+        const vers = document.getElementById('aVersions').value;
+        const links = document.getElementById('aLinks').value;
+
+        const code = `
+        <div class="card" data-cat="${cat}" onclick="openDownload('${name}', '${img}', '${vers}', '${links}', '${cat}')">
+            <img src="${img}" class="card-img">
+            <div class="card-body">
+                <div class="card-meta">${cat}</div>
+                <h3 class="card-title">${name}</h3>
+                <p style="color:#555; font-size:12px; margin-top:5px;">Click to view ${vers.split(',').length} versions</p>
+            </div>
+        </div>`;
+        
+        document.getElementById('outputArea').value = code;
+        document.getElementById('outputArea').style.display = 'block';
+    }
+</script>
+
+<div id="initial-data" style="display:none;">
+    <div class="card" data-cat="clients" onclick="openDownload('Argon Client', 'https://i.imgur.com/8nN2S3H.png', '1.21, 1.21.1', 'https://shrinkme.click/link1, https://shrinkme.click/link2', 'clients')">
+        <img src="https://i.imgur.com/8nN2S3H.png" class="card-img">
+        <div class="card-body">
+            <div class="card-meta">clients</div>
+            <h3 class="card-title">Argon Client</h3>
+            <p style="color:#555; font-size:12px; margin-top:5px;">Click to view 2 versions</p>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    // Load initial data into grid
+    document.getElementById('mainGrid').innerHTML = document.getElementById('initial-data').innerHTML;
 </script>
 
 </body>
