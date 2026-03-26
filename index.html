@@ -443,16 +443,15 @@
         }
     }
 
-    function checkAdminAccess() {
-        let p = prompt("Admin Password:");
-        if(p === "pookie123") { // DEFAULT PASSWORD - Change this.
-            document.getElementById('adminConsole').style.display = 'block';
-            window.scrollTo(0,document.body.scrollHeight);
-        } else {
-            alert("Access Denied!");
-        }
+   function checkAdminAccess() {
+    let p = prompt("Admin Password:");
+    if(btoa(p) === "cG9va2llMTIz") { 
+        document.getElementById('adminConsole').style.display = 'block';
+        window.scrollTo(0,document.body.scrollHeight);
+    } else {
+        alert("Access Denied!");
     }
-
+}
     function newItemGen() {
         const name = document.getElementById('aName').value;
         const cat = document.getElementById('aCat').value;
