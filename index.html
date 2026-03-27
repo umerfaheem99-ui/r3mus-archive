@@ -3,507 +3,108 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>R3MUS VAULT | Premium Archive</title>
+    <title>R3MU VAULT | Official Archive</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        :root {
-            --bg: #111111;
-            --main-text: #ffffff;
-            --sub-text: #888888;
-            --accent-purple: #8147ff; /* Image 10 purple */
-            --header-bg: #161616;
-            --card-bg: #161616;
-            --accent-dark: #1e1e1e;
-        }
-
-        body {
-            margin: 0;
-            background-color: var(--bg);
-            color: var(--main-text);
-            font-family: 'Inter', sans-serif;
-            overflow-x: hidden;
-            -webkit-font-smoothing: antialiased;
-        }
-
-        .main-container {
-            max-width: 1300px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        /* --- Floating Header (Image 10 Style) --- */
-        .top-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background-color: var(--header-bg);
-            border-radius: 10px;
-            padding: 15px 30px;
-            margin-bottom: 50px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.5);
-        }
-
-        .header-brand h1 {
-            font-size: 24px;
-            font-weight: 900;
-            background: linear-gradient(90deg, #fff, var(--accent-purple));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin: 0;
-            letter-spacing: -1px;
-        }
-
-        .header-social {
-            display: flex;
-            gap: 15px;
-        }
-
-        .social-icon {
-            color: white;
-            font-size: 18px;
-            background: rgba(255,255,255,0.05);
-            width: 40px;
-            height: 40px;
-            border-radius: 8px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-decoration: none;
-            transition: 0.3s;
-        }
-
-        .social-icon:hover {
-            background: var(--accent-purple);
-            transform: scale(1.1);
-        }
-
-        /* --- Category & Search (Image 10 Style) --- */
-        .filter-section {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 20px;
-            margin-bottom: 50px;
-        }
-
-        .category-tabs {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
-        .tab {
-            padding: 10px 22px;
-            background-color: var(--accent-dark);
-            border-radius: 8px;
-            font-size: 14px;
-            font-weight: 600;
-            color: var(--sub-text);
-            cursor: pointer;
-            border: 1px solid transparent;
-            transition: 0.3s;
-            text-transform: uppercase;
-        }
-
-        .tab.active {
-            background-color: var(--accent-purple);
-            color: white;
-            border-color: var(--accent-purple);
-        }
-
-        .tab:hover:not(.active) {
-            border-color: var(--accent-purple);
-            color: white;
-        }
-
-        .search-container {
-            width: 100%;
-            max-width: 600px;
-        }
-
-        .search-input {
-            width: 100%;
-            padding: 16px 20px;
-            background-color: var(--accent-dark);
-            border-radius: 10px;
-            border: 1px solid transparent;
-            color: white;
-            font-size: 16px;
-            outline: none;
-            transition: 0.3s;
-        }
-
-        .search-input:focus {
-            border-color: var(--accent-purple);
-            box-shadow: 0 0 15px rgba(129,71,255,0.2);
-        }
-
-        /* --- Clients Grid & Cards --- */
-        .client-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 25px;
-        }
-
-        .client-card {
-            background-color: var(--card-bg);
-            border-radius: 15px;
-            overflow: hidden;
-            border: 1px solid transparent;
-            transition: 0.3s;
-            display: flex;
-            flex-direction: column;
-            cursor: pointer;
-        }
-
-        .client-card:hover {
-            border-color: var(--accent-purple);
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.6);
-        }
-
-        .card-image-wrapper {
-            width: 100%;
-            height: 160px;
-            background-color: var(--accent-dark);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: #444;
-            font-size: 14px;
-            border-bottom: 1px solid rgba(255,255,255,0.03);
-        }
-
-        .card-img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .card-info {
-            padding: 20px;
-        }
-
-        .card-meta {
-            font-size: 11px;
-            color: var(--sub-text);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-weight: 600;
-        }
-
-        .card-name {
-            font-size: 22px;
-            font-weight: 800;
-            margin: 8px 0;
-            color: white;
-        }
-
-        .card-versions {
-            font-size: 12px;
-            color: var(--sub-text);
-        }
-
-        /* --- Download Page View --- */
-        #downloadPageView {
-            display: none;
-            text-align: center;
-        }
-
-        .back-vault {
-            display: inline-block;
-            margin-bottom: 30px;
-            color: var(--accent-purple);
-            cursor: pointer;
-            font-weight: 700;
-            font-size: 14px;
-        }
-
-        .dl-header h1 {
-            font-size: 3.5rem;
-            margin-bottom: 15px;
-            letter-spacing: -2px;
-        }
-
-        .dl-img-preview {
-            width: 100%;
-            max-width: 700px;
-            border-radius: 15px;
-            margin: 30px 0;
-            border: 1px solid var(--accent-dark);
-        }
-
-        .links-stack {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            max-width: 450px;
-            margin: 0 auto;
-        }
-
-        .stack-btn {
-            background-color: var(--accent-purple);
-            color: white;
-            padding: 16px;
-            border-radius: 10px;
-            text-decoration: none;
-            font-weight: 700;
-            display: flex;
-            justify-content: space-between;
-            transition: 0.2s;
-        }
-
-        .stack-btn:hover {
-            transform: scale(1.02);
-            box-shadow: 0 5px 15px rgba(129,71,255,0.3);
-        }
-
-        /* --- Admin Console --- */
-        #adminConsole {
-            display: none;
-            margin-top: 100px;
-            padding: 30px;
-            background-color: var(--card-bg);
-            border-radius: 15px;
-            border: 2px dashed var(--accent-purple);
-        }
-
-        .adm-section {
-            margin-bottom: 25px;
-        }
-
-        .adm-input, .adm-select, .adm-textarea {
-            width: 100%;
-            padding: 12px;
-            background-color: #000;
-            border: 1px solid #333;
-            color: white;
-            border-radius: 8px;
-            margin-top: 5px;
-            box-sizing: border-box;
-        }
-
-        .adm-btn {
-            background-color: var(--accent-purple);
-            color: white;
-            border: none;
-            padding: 15px;
-            border-radius: 8px;
-            font-weight: 700;
-            cursor: pointer;
-            width: 100%;
-        }
-
-        .admin-trigger {
-            margin-top: 100px;
-            text-align: center;
-            font-size: 10px;
-            color: #0c0c0c;
-            cursor: pointer;
-        }
+        :root { --bg: #050505; --accent: #8147ff; --card-bg: #0f0f0f; --text: #eee; }
+        body { margin: 0; background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; }
+        #vaultContent { padding: 40px 20px; max-width: 1300px; margin: 0 auto; }
+        
+        /* Admin Console UI */
+        #adminArea { display: none; padding: 30px; background: #0a0a0a; border-radius: 15px; border: 1px dashed var(--accent); max-width: 800px; margin: 50px auto; }
+        .adm-title { color: var(--accent); font-size: 2rem; font-weight: 900; margin-bottom: 20px; }
+        .adm-in { width: 100%; padding: 14px; margin-bottom: 12px; background: #000; color: white; border: 1px solid #333; border-radius: 8px; box-sizing: border-box; font-family: inherit; }
+        
+        /* Version System with +/- */
+        .v-row { display: flex; gap: 10px; margin-bottom: 10px; align-items: center; }
+        .btn-action { width: 45px; height: 45px; border-radius: 10px; cursor: pointer; font-size: 24px; font-weight: bold; transition: 0.3s; flex-shrink: 0; border: 2px solid; display: flex; align-items: center; justify-content: center; }
+        .btn-plus { background: #1a1a1a; color: var(--accent); border-color: var(--accent); }
+        .btn-minus { background: #1a1a1a; color: #ff4747; border-color: #ff4747; }
+        .btn-plus:hover { background: var(--accent); color: white; }
+        .btn-minus:hover { background: #ff4747; color: white; }
+        
+        .adm-btn { width: 100%; padding: 18px; background: var(--accent); color: white; border: none; font-weight: 900; border-radius: 10px; cursor: pointer; text-transform: uppercase; margin-top: 10px; font-size: 1.1rem; }
+        
+        /* Grid */
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 25px; }
+        .card { background: var(--card-bg); border-radius: 15px; border: 1px solid #1a1a1a; padding: 20px; cursor: pointer; }
     </style>
 </head>
 <body>
 
-<div class="main-container">
-    <div class="top-header" id="topHeader">
-        <div class="header-brand">
-            <h1>ʀ3ᴍᴜꜱ ᴠᴀᴜʟᴛ</h1>
-        </div>
-        <div class="header-social">
-            <a href="YT_LINK_HERE" class="social-icon" id="ytLink" target="_blank"><i class="fab fa-youtube"></i></a>
-            <a href="DISCORD_LINK_HERE" class="social-icon" id="dcLink" target="_blank"><i class="fab fa-discord"></i></a>
-        </div>
+    <div id="vaultContent">
+        <h1 style="text-align:center; font-size: 3.5rem; font-weight: 900; letter-spacing: -2px;">ʀ3ᴍᴜ ᴠᴀᴜʟᴛ</h1>
+        <div class="grid" id="mainGrid"></div>
     </div>
 
-    <div id="homeView">
-        <div class="filter-section">
-            <div class="category-tabs" id="categoryNav">
-                <div class="tab active" onclick="setCat('all')">All</div>
-                <div class="tab" onclick="setCat('clients')">Clients</div>
-                <div class="tab" onclick="setCat('mods')">Mods/Macros</div>
-                <div class="tab" onclick="setCat('bypass')">SS Bypass</div>
-                <div class="tab" onclick="setCat('pvp')">PvP Optimizers</div>
-                <div class="tab" onclick="setCat('source')">Source Codes</div>
-            </div>
-            <div class="search-container">
-                <input type="text" id="vaultSearch" class="search-input" onkeyup="filterItems()" placeholder="Search through the vault...">
-            </div>
-        </div>
-
-        <div class="client-grid" id="mainGrid">
-            </div>
-    </div>
-
-    <div id="downloadPageView">
-        <div class="back-vault" onclick="showVault()">← BACK TO VAULT</div>
-        <div class="dl-header">
-            <h1 id="dlTitle">Client Name</h1>
-            <p id="dlDesc" style="color: var(--sub-text); text-transform: uppercase;">Category: CLIENTS</p>
-            <img id="dlImg" src="" alt="Preview" class="dl-img-preview">
-        </div>
-        <div class="links-stack" id="linksStack">
-            </div>
-    </div>
-
-    <p class="admin-trigger" onclick="checkAdminAccess()">Vault Admin Access</p>
-    
-    <div id="adminConsole">
-        <h2 style="color:var(--accent-purple); margin:0 0 20px 0;">Vault Manager Console</h2>
+    <div id="adminArea">
+        <div class="adm-title">Vault Manager Console</div>
         
-        <div class="adm-section">
-            <h3>Manage Social Links</h3>
-            <label>YouTube Link:</label>
-            <input type="text" id="aYt" class="adm-input" placeholder="YouTube full URL">
-            <label>Discord Invite:</label>
-            <input type="text" id="aDc" class="adm-input" placeholder="Discord full Invite URL">
-            <button onclick="updateSocials()" class="adm-btn" style="margin-top:10px;">Update Social Links</button>
-        </div>
-
-        <div class="adm-section">
-            <h3>Add New Item</h3>
-            <label>Category:</label>
-            <select id="aCat" class="adm-select">
-                <option value="clients">Clients</option>
-                <option value="mods">Mods/Macros</option>
-                <option value="bypass">SS Bypass</option>
-                <option value="pvp">PvP Optimizers</option>
-                <option value="source">Source Codes</option>
-            </select>
-            <label>Item Name:</label>
-            <input type="text" id="aName" class="adm-input" placeholder="e.g. Argon Client">
-            <label>Image URL (Direct Link):</label>
-            <input type="text" id="aImg" class="adm-input" placeholder="e.g. https://i.imgur.com/yourimage.png">
-            <label>Versions (Comma separated):</label>
-            <input type="text" id="aVersions" class="adm-input" placeholder="e.g. 1.21, 1.21.1">
-            <label>Links (Comma separated, order matching versions):</label>
-            <input type="text" id="aLinks" class="adm-input" placeholder="e.g. link1, link2">
-            
-            <button onclick="newItemGen()" class="adm-btn" style="margin-top:10px;">Generate Item Code</button>
+        <select id="aCat" class="adm-in">
+            <option value="clients">Clients</option>
+            <option value="mods">Mods / Macros</option>
+            <option value="source">Source Codes</option>
+            <option value="shop">Shop</option>
+        </select>
+        
+        <input type="text" id="aName" class="adm-in" placeholder="Item Name">
+        <input type="text" id="aImg" class="adm-in" placeholder="Image URL">
+        <textarea id="aDesc" class="adm-in" placeholder="Description..." style="height:100px;"></textarea>
+        
+        <div id="versionList">
+            <div class="v-row">
+                <input type="text" class="adm-in v-num" placeholder="Version" style="margin-bottom:0;">
+                <input type="text" class="adm-in v-link" placeholder="Download Link" style="margin-bottom:0;">
+                <button class="btn-action btn-plus" onclick="addVersion()">+</button>
+            </div>
         </div>
         
-        <label>Generated HTML (Copy & Paste):</label>
-        <textarea id="admOutput" class="adm-textarea" readonly></textarea>
+        <button class="adm-btn" onclick="generateItem()">GENERATE & COPY CODE</button>
     </div>
-</div>
 
-<script>
-    // System to handle views
-    function showVault() {
-        document.getElementById('homeView').style.display = 'block';
-        document.getElementById('topHeader').style.display = 'flex';
-        document.getElementById('downloadPageView').style.display = 'none';
-    }
-
-    function openItemPage(name, img, versions, links, cat) {
-        document.getElementById('homeView').style.display = 'none';
-        document.getElementById('topHeader').style.display = 'none';
-        document.getElementById('downloadPageView').style.display = 'block';
-
-        document.getElementById('dlTitle').innerText = name;
-        document.getElementById('dlDesc').innerText = "Category: " + cat;
-        document.getElementById('dlImg').src = img;
-
-        const vArr = versions.split(',');
-        const lArr = links.split(',');
-        let html = '';
-        vArr.forEach((v, i) => {
-            if(lArr[i]) {
-                html += `<a href="${lArr[i].trim()}" class="stack-btn" target="_blank"><span>DOWNLOAD v${v.trim()}</span> <span>→</span></a>`;
-            }
-        });
-        document.getElementById('linksStack').innerHTML = html;
-        window.scrollTo(0,0);
-    }
-
-    function setCat(cat) {
-        let cards = document.getElementsByClassName('client-card');
-        let tabs = document.getElementsByClassName('tab');
-        
-        for(let tab of tabs) tab.classList.remove('active');
-        event.target.classList.add('active');
-
-        for (let card of cards) {
-            if (cat === 'all' || card.getAttribute('data-cat') === cat) {
-                card.style.display = "flex";
+    <script>
+        // Secret URL Access
+        if (window.location.search === "?nimda") {
+            if (btoa(prompt("Security Key:")) === "cG9va2llMTIz") {
+                document.getElementById('adminArea').style.display = 'block';
+                document.getElementById('vaultContent').style.display = 'none';
             } else {
-                card.style.display = "none";
+                window.location.href = window.location.pathname;
             }
         }
-    }
 
-    function filterItems() {
-        let input = document.getElementById('vaultSearch').value.toUpperCase();
-        let cards = document.getElementsByClassName('client-card');
-        for (let i = 0; i < cards.length; i++) {
-            let title = cards[i].querySelector('.card-name').innerText;
-            cards[i].style.display = title.toUpperCase().indexOf(input) > -1 ? "flex" : "none";
+        function addVersion() {
+            const container = document.getElementById('versionList');
+            const row = document.createElement('div');
+            row.className = 'v-row';
+            row.innerHTML = `
+                <input type="text" class="adm-in v-num" placeholder="Version" style="margin-bottom:0;">
+                <input type="text" class="adm-in v-link" placeholder="Download Link" style="margin-bottom:0;">
+                <button class="btn-action btn-minus" onclick="this.parentElement.remove()">-</button>
+            `;
+            container.appendChild(row);
         }
-    }
 
-   function checkAdminAccess() {
-    let p = prompt("Admin Password:");
-    if(btoa(p) === "cG9va2llMTIz") { 
-        document.getElementById('adminConsole').style.display = 'block';
-        window.scrollTo(0,document.body.scrollHeight);
-    } else {
-        alert("Access Denied!");
-    }
-}
-    function newItemGen() {
-        const name = document.getElementById('aName').value;
-        const cat = document.getElementById('aCat').value;
-        const img = document.getElementById('aImg').value;
-        const vers = document.getElementById('aVersions').value;
-        const links = document.getElementById('aLinks').value;
-        const vCount = vers.split(',').length;
+        function generateItem() {
+            const n = document.getElementById('aName').value;
+            const c = document.getElementById('aCat').value;
+            const i = document.getElementById('aImg').value;
+            const d = document.getElementById('aDesc').value;
+            
+            const vArr = Array.from(document.getElementsByClassName('v-num')).map(e => e.value).filter(e => e !== "");
+            const lArr = Array.from(document.getElementsByClassName('v-link')).map(e => e.value).filter(e => e !== "");
 
-        const code = `
-        <div class="client-card" data-cat="${cat}" onclick="openItemPage('${name}', '${img}', '${vers}', '${links}', '${cat}')">
-            <div class="card-image-wrapper">
-                <img src="${img}" class="card-img" alt="${name} Preview">
-            </div>
-            <div class="card-info">
-                <div class="card-meta">${cat}</div>
-                <h3 class="card-name">${name}</h3>
-                <p class="card-versions">Click for ${vCount} version(s)</p>
-            </div>
-        </div>`;
-        
-        document.getElementById('admOutput').value = code;
-        document.getElementById('admOutput').style.display = 'block';
-    }
-
-    function updateSocials() {
-        const yt = document.getElementById('aYt').value;
-        const dc = document.getElementById('aDc').value;
-        if(yt) document.getElementById('ytLink').href = yt;
-        if(dc) document.getElementById('dcLink').href = dc;
-        alert("Social links updated for this session! To save, manual edit HTML.");
-    }
-</script>
-
-<div id="vault-data" style="display:none;">
-    
-    <div class="client-card" data-cat="clients" onclick="openItemPage('Argon Client', 'https://via.placeholder.com/400x200?text=Argon+Preview', '1.21, 1.21.1', 'https://shrinkme.click/link1, https://shrinkme.click/link2', 'clients')">
-        <div class="card-image-wrapper">
-            <img src="https://via.placeholder.com/400x200?text=Argon+Preview" class="card-img" alt="Argon Client Preview">
-        </div>
-        <div class="card-info">
-            <div class="card-meta">clients</div>
-            <h3 class="card-name">Argon Client</h3>
-            <p class="card-versions">Click for 2 version(s)</p>
-        </div>
-    </div>
-
-</div>
-
-<script>
-    // Initialize Grid data
-    document.getElementById('mainGrid').innerHTML = document.getElementById('vault-data').innerHTML;
-</script>
-
+            const code = `
+            <div class="card" data-cat="${c}" onclick="openItem('${n}','${i}','${vArr.join(',')}','${lArr.join(',')}','${c}','${btoa(d)}')">
+                <img src="${i}" style="width:100%; border-radius:10px; height:180px; object-fit:cover;">
+                <div class="card-cat" style="color:var(--accent); font-size:10px; font-weight:800; margin-top:15px; text-transform:uppercase;">${c}</div>
+                <h3 style="margin:5px 0; font-size:22px;">${n}</h3>
+                <p style="font-size:12px; color:#666;">${d.substring(0,60)}...</p>
+            </div>`;
+            
+            navigator.clipboard.writeText(code);
+            alert("Code Copied!");
+        }
+    </script>
 </body>
 </html>
